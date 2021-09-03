@@ -1,0 +1,10 @@
+#!/usr/bin/fish
+
+set last_command (history | head -n 1)
+
+while read -l line
+    echo $line
+end
+
+# notify-send "We are finished" "Command: $last_command"
+command_line_bot.py "$last_command finished"
