@@ -7,9 +7,9 @@ import sys
 API_KEY = config('API_KEY')
 bot = telebot.TeleBot(API_KEY)
 
-STEF=config('STEFS_KEY')
+USER=config('USER_ID')
 message = sys.argv[1]
-bot.send_message(STEF, message) 
+bot.send_message(USER, message) 
 
 
 
