@@ -1,10 +1,11 @@
 #!/usr/bin/fish
 
+# gets the command right as the pipe is run, so that it is most likly the correct command
 set last_command (history | head -n 1)
 
+# allows all the stdin to flow right passed tell me
 while read -l line
     echo $line
 end
 
-# notify-send "We are finished" "Command: $last_command"
-command_line_bot.py "$last_command finished"
+telegram_tellme.py "$last_command finished"
