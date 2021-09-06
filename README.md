@@ -1,5 +1,5 @@
 # tellme
-### (this is a first pass so it probably wont work for you just yet)
+### (current build wont work, upgrading it all to python during this week)
 
 Simple little script (for now) that will send you a Telegram message when you add it as a pipe in a command.
 
@@ -13,5 +13,4 @@ Simple little script (for now) that will send you a Telegram message when you ad
 -- API_KEY=(your Telegram bots API key)
 -- USER_KEY=(your Telegram ID)
 
-Should all work from there
 

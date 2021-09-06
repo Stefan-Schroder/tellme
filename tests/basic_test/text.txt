@@ -1,0 +1,10 @@
+this is a file 
+where i write a few lines 
+of some random nonesense, with
+very different line spaces.
+and return characters.
+There are a few more lines
+that are needed in this file
+because it is used to ensure that each line is being piped through tellme
+without being hindered or altered in any way, just so that 
+scripts used around tellme are not affected.
