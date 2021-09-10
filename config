@@ -1,0 +1,5 @@
+SHELL=FISH
+
+FISH_HIST_PATH=~/.local/share/fish/fish_history
+ZSH_HIST_PATH=~/.zsh_history
+BASH_HIST_PATH=~/.bash_history

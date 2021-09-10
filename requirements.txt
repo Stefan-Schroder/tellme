@@ -1,0 +1,10 @@
+altgraph==0.17
+certifi==2021.5.30
+charset-normalizer==2.0.4
+idna==3.2
+pyinstaller==4.5.1
+pyinstaller-hooks-contrib==2021.3
+pyTelegramBotAPI==4.0.0
+python-decouple==3.4
+requests==2.26.0
+urllib3==1.26.6

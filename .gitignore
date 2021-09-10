@@ -1,1 +1,5 @@
 .env
+dist/
+build/
+*.spec
+temp/
