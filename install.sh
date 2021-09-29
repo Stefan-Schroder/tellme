@@ -50,12 +50,17 @@ fi
 
 pyinstaller -F tellme/tellme.py 
 
-echo "-----------"
-echo "Would you like me to link dist/tellme into /usr/local/bin"
-read -p "(running sudo ln -s $PWD/dist/tellme /usr/local/bin/) [y/N]" yn
+if [ ! -e /usr/local/bin/tellme ]
+then
+    echo "-----------"
+    echo "Would you like me to link dist/tellme into /usr/local/bin"
+    read -p "(running sudo ln -s $PWD/dist/tellme /usr/local/bin/) [y/N]" yn
 
-case $yn in
-    [Yy]* ) sudo ln -s $PWD/dist/tellme /usr/local/bin/; break;;
-    [Nn]* ) exit;;
-    * ) exit;;
-esac
+    case $yn in
+        [Yy]* ) sudo ln -s $PWD/dist/tellme /usr/local/bin/; break;;
+        [Nn]* ) exit;;
+        * ) exit;;
+    esac
+else
+    echo "Found binary in bin"
+fi

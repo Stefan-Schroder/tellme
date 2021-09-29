@@ -19,13 +19,12 @@ def GetFishCommand(history_path):
     
 
 def main():
-    print(os.path.abspath(__file__)[:-16]+".env")
-    print(type(os.path.abspath(__file__)))
-    load_dotenv(os.path.abspath(__file__)[:-16]+".env")
+    # Getting Root directory of this program
+    root_dir = os.path.dirname(sys.executable)[:-5]
+
     # loading in configs
-    # root_dir = config('TELLME_ROOT')
-    root_dir = os.getenv('TELLME_ROOT')
-    print(root_dir);
+    load_dotenv(root_dir+"/.env")
+
     config_file = configparser.ConfigParser()
     config_file.read(root_dir+'/config.ini')
 
@@ -37,7 +36,7 @@ def main():
     for line in sys.stdin:
         sys.stdout.write(line)
 
-    telegram_tellme.send_message(command)
+    telegram_tellme.send_message(command, root_dir)
 
 
 if (__name__ == "__main__"):
