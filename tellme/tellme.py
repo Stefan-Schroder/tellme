@@ -7,6 +7,7 @@ import subprocess
 import configparser
 from decouple import config
 from dotenv import load_dotenv
+import os
 
 def GetFishCommand(history_path):
     # I will give my left sock for someone to find a more efficient way to do this
@@ -18,13 +19,14 @@ def GetFishCommand(history_path):
     
 
 def main():
-    # print(os.path.abspath(__file__))
-    load_dotenv(os.path.abspath(__file__))
+    print(os.path.abspath(__file__)[:-16]+".env")
+    print(type(os.path.abspath(__file__)))
+    load_dotenv(os.path.abspath(__file__)[:-16]+".env")
     # loading in configs
     # root_dir = config('TELLME_ROOT')
     root_dir = os.getenv('TELLME_ROOT')
-    config_file = configparser.ConfigParser()
     print(root_dir);
+    config_file = configparser.ConfigParser()
     config_file.read(root_dir+'/config.ini')
 
     # get the last few line from config file

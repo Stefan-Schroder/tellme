@@ -4,6 +4,7 @@ from decouple import config
 import telebot
 import sys
 from dotenv import load_dotenv
+import os
 
 def send_message(message):
     load_dotenv
