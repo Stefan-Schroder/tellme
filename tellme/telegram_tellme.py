@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import os
 
 def send_message(message, root_dir):
-    load_dotenv()
+    load_dotenv(root_dir+"/.env")
 
     API_KEY = os.getenv('API_KEY')
     bot = telebot.TeleBot(API_KEY)

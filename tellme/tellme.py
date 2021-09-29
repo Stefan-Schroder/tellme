@@ -23,8 +23,6 @@ def main():
     root_dir = os.path.dirname(sys.executable)[:-5]
 
     # loading in configs
-    load_dotenv(root_dir+"/.env")
-
     config_file = configparser.ConfigParser()
     config_file.read(root_dir+'/config.ini')
 
