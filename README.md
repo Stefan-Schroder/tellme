@@ -24,4 +24,6 @@ $ sleep 5 | tellme
 - ZSH not implemented yet
 - Bash not implemented yet
 
-
+## TODO:
+1) Add server name to message incase its being used cross servers
+2) Add Bash Support

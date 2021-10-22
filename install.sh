@@ -23,7 +23,7 @@ then
     read -p "We have not detected a .env file, would you like a blank one to be generated? [y/N]" yn
     case $yn in
         [Yy]* ) 
-            echo "API_KEY=\nUSER_ID=\nTELLME_ROOT=$PWD\n" > .env
+            echo "API_KEY=\nUSER_ID=\n" > .env
             echo "Generation complete."; 
             echo "-------------"
             echo "In the .env API_KEY needs to be filled out with the key for YOUR bot (you have to make your own one)"
