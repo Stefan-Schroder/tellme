@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/home/stefan/.pyenv/shims/python3
 
 from decouple import config
 import telebot
@@ -14,3 +14,9 @@ def send_message(message, root_dir):
 
     USER = os.getenv('USER_ID')
     bot.send_message(USER, message) 
+
+if __name__ == "__main__":
+    send_message(sys.argv[1], sys.argv[0][0:-26])
+
+
+

@@ -14,9 +14,8 @@ def GetFishCommand(history_path):
     # - dont load the whole file into memory (history can be huge)
     # - dont use 700 lines to do it
     # 20 is arbritrary, just need to find the last tellme command (sometimes its not the last command used)
-    command = subprocess.check_output('tail -n 20 '+history_path+' | grep -E "^- cmd:" | grep -E "[\| ]tellme" | tail -n 1', shell=True)
+    command = subprocess.check_output("tac "+history_path+" | awk '{ if($0 ~/- cmd/){ if($0 ~/[\| ]tellme/){ print $0; exit }}}'", shell=True)
     return command[6:-1]
-    
 
 def main():
     # Getting Root directory of this program
@@ -30,9 +29,13 @@ def main():
     if (config_file['USER']['SHELL']=='FISH'):
         command = GetFishCommand(config_file['USER']['FISH_HIST_PATH'])
 
+    print(command)
     # allows all the stdin to flow right passed tell me
-    for line in sys.stdin:
-        sys.stdout.write(line)
+    while True:
+            chunk = sys.stdin.read(64)  # Read up to 1024 bytes at a time
+            if not chunk:
+                break
+            print(chunk, end='')
 
     telegram_tellme.send_message(command, root_dir)
 
