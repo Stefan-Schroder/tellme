@@ -1,11 +1,9 @@
-#!/home/stefan/.pyenv/shims/python3
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import telegram_tellme
 import sys
 import subprocess
 import configparser
-from decouple import config
 from dotenv import load_dotenv
 import os
 
