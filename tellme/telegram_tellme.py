@@ -1,22 +1,26 @@
-#!/home/stefan/.pyenv/shims/python3
+#!/usr/bin/env python3
 
-from decouple import config
-import telebot
 import sys
 from dotenv import load_dotenv
 import os
+
+#telegram
+import asyncio
+import telegram
+from telegram.ext import ApplicationBuilder
+
+# using telegram.Bot
+async def send(chat, msg, key):
+    await telegram.Bot(key).sendMessage(chat_id=chat, text=msg, parse_mode="MarkdownV2")
 
 def send_message(message, root_dir):
     load_dotenv(root_dir+"/.env")
 
     API_KEY = os.getenv('API_KEY')
-    bot = telebot.TeleBot(API_KEY)
-
     USER = os.getenv('USER_ID')
-    bot.send_message(USER, message) 
 
-if __name__ == "__main__":
-    send_message(sys.argv[1], sys.argv[0][0:-26])
+    msg=message.replace('\\n', '\n')\
+            .replace('\\r', '\r')\
+            .replace('\\t', '\t')
 
-
-
+    asyncio.run(send(USER, msg, API_KEY))
