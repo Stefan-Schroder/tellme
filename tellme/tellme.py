@@ -17,19 +17,11 @@ def GetFishCommand(history_path):
     command = subprocess.check_output("tac "+history_path+" | awk '{ if($0 ~/- cmd/){ if($0 ~/[\| ]tellme/){ print $0; exit }}}'", shell=True)
     return command[6:-1]
 
-def main():
-    # Getting Root directory of this program
-    root_dir = os.path.dirname(sys.executable)[:-5]
-
-    # loading in configs
-    config_file = configparser.ConfigParser()
-    config_file.read(root_dir+'/config.ini')
-
+def PassthroughMode(config_file, root_dir):
     # get the last few line from config file
     if (config_file['USER']['SHELL']=='FISH'):
         command = GetFishCommand(config_file['USER']['FISH_HIST_PATH'])
 
-    print(command)
     # allows all the stdin to flow right passed tell me
     while True:
             chunk = sys.stdin.read(64)  # Read up to 1024 bytes at a time
@@ -39,6 +31,24 @@ def main():
 
     telegram_tellme.send_message(command, root_dir)
 
+def MessageMode(root_dir):
+    message = sys.argv[1]
+
+    telegram_tellme.send_message(message, root_dir)
+
+def main():
+    # Getting Root directory of this program
+    root_dir = os.path.dirname(sys.executable)[:-5]
+
+    # loading in configs
+    config_file = configparser.ConfigParser()
+    config_file.read(root_dir+'/config.ini')
+
+    # check system arguments
+    if (len(sys.argv) > 1):
+        MessageMode(root_dir)
+    else:
+        PassthroughMode(config_file, root_dir)
 
 if (__name__ == "__main__"):
     main()
