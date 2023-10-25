@@ -21,6 +21,10 @@ def send_message(message, root_dir):
 
     msg=message.replace('\\n', '\n')\
             .replace('\\r', '\r')\
-            .replace('\\t', '\t')
+            .replace('\\t', '\t')\
+            .replace('-','\-')\
+            .replace('.','\.')\
+            .replace('=','\=')
 
+    print (msg)
     asyncio.run(send(USER, msg, API_KEY))
