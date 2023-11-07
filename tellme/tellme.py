@@ -17,8 +17,9 @@ def GetFishCommand(history_path):
 
 def PassthroughMode(config_file, root_dir):
     # get the last few line from config file
+    command = ""
     if (config_file['USER']['SHELL']=='FISH'):
-        command = GetFishCommand(config_file['USER']['FISH_HIST_PATH'])
+        command = str(GetFishCommand(config_file['USER']['FISH_HIST_PATH']))
 
     # allows all the stdin to flow right passed tell me
     while True:
@@ -26,6 +27,7 @@ def PassthroughMode(config_file, root_dir):
             if not chunk:
                 break
             print(chunk, end='')
+
 
     telegram_tellme.send_message(command, root_dir)
 
