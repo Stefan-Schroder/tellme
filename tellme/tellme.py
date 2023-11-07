@@ -13,13 +13,14 @@ def GetFishCommand(history_path):
     # - dont use 700 lines to do it
     # 20 is arbritrary, just need to find the last tellme command (sometimes its not the last command used)
     command = subprocess.check_output("tac "+history_path+" | awk '{ if($0 ~/- cmd/){ if($0 ~/[\| ]tellme/){ print $0; exit }}}'", shell=True)
-    return command[6:-1]
+    return command[7:-1]
 
 def PassthroughMode(config_file, root_dir):
     # get the last few line from config file
-    command = ""
+    command = "Code completed: \n```bash\n"
     if (config_file['USER']['SHELL']=='FISH'):
-        command = str(GetFishCommand(config_file['USER']['FISH_HIST_PATH']))
+        command += str(GetFishCommand(config_file['USER']['FISH_HIST_PATH']))
+    command += "\n```"
 
     # allows all the stdin to flow right passed tell me
     while True:
