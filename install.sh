@@ -4,20 +4,6 @@
 # kills the script if any of these commands fail
 set -e
 
-if ! [ -x "$(command -v pyinstaller)" ];
-then
-    echo "error: pyinstaller not detected!"
-    echo "Ensure you have installed all of the python requirements found in requirements.txt"
-    echo "if not run: pip install -r requirements.txt"
-    read -p "Shall I run it for your? [y/N]" yn
-
-    case $yn in
-        [Yy]* ) pip install -r requirements.txt; break;;
-        [Nn]* ) exit 1;;
-        * ) exit 1;;
-    esac
-fi
-
 if [ ! -e .env ]
 then
     read -p "We have not detected a .env file, would you like a blank one to be generated? [y/N]" yn
@@ -48,19 +34,4 @@ else
     echo "found .env"
 fi
 
-pyinstaller -F tellme/tellme.py 
-
-if [ ! -e /usr/local/bin/tellme ]
-then
-    echo "-----------"
-    echo "Would you like me to link dist/tellme into /usr/local/bin"
-    read -p "(running sudo ln -s $PWD/dist/tellme /usr/local/bin/) [y/N]" yn
-
-    case $yn in
-        [Yy]* ) sudo ln -s $PWD/dist/tellme /usr/local/bin/; break;;
-        [Nn]* ) exit;;
-        * ) exit;;
-    esac
-else
-    echo "Found binary in bin"
-fi
+echo "I recommend you \`alias=uv run --project $PWD tellme\` to your shell"

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import telegram_tellme
+from . import telegram_tellme
 import sys
 import subprocess
 import configparser
@@ -12,7 +12,7 @@ def GetFishCommand(history_path):
     # - dont load the whole file into memory (history can be huge)
     # - dont use 700 lines to do it
     # 20 is arbritrary, just need to find the last tellme command (sometimes its not the last command used)
-    command = subprocess.check_output("tac "+history_path+" | awk '{ if($0 ~/- cmd/){ if($0 ~/[\| ]tellme/){ print $0; exit }}}'", shell=True)
+    command = subprocess.check_output("tac "+history_path+" | awk '{ if($0 ~/- cmd/){ if($0 ~/[| ]tellme/){ print $0; exit }}}'", shell=True)
     return command[7:-1]
 
 def PassthroughMode(config_file, root_dir):
@@ -24,7 +24,7 @@ def PassthroughMode(config_file, root_dir):
 
     # allows all the stdin to flow right passed tell me
     while True:
-            chunk = sys.stdin.read(64)  # Read up to 1024 bytes at a time
+            chunk = sys.stdin.read(1)  # Read up to 1024 bytes at a time
             if not chunk:
                 break
             print(chunk, end='')
@@ -34,12 +34,13 @@ def PassthroughMode(config_file, root_dir):
 
 def MessageMode(root_dir):
     message = sys.argv[1]
+    print("message: ", message);
 
     telegram_tellme.send_message(message, root_dir)
 
-def main():
+def Controller():
     # Getting Root directory of this program
-    root_dir = os.path.dirname(sys.executable)[:-5]
+    root_dir = os.path.dirname(sys.executable)+"/"
 
     # loading in configs
     config_file = configparser.ConfigParser()
@@ -52,4 +53,4 @@ def main():
         PassthroughMode(config_file, root_dir)
 
 if (__name__ == "__main__"):
-    main()
+    Controller()

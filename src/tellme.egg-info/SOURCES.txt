@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/tellme/__init__.py
+src/tellme/telegram_tellme.py
+src/tellme/tellme.py
+src/tellme.egg-info/PKG-INFO
+src/tellme.egg-info/SOURCES.txt
+src/tellme.egg-info/dependency_links.txt
+src/tellme.egg-info/entry_points.txt
+src/tellme.egg-info/requires.txt
+src/tellme.egg-info/top_level.txt

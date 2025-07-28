@@ -1,0 +1,2 @@
+[console_scripts]
+tellme = tellme:main
